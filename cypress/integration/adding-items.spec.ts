@@ -7,7 +7,7 @@ describe("Adding items", () => {
     name: "Carrot",
     sellIn: 30,
     quality: 30,
-    type: Types.LEGENDARY
+    type: Types.NORMAL
   };
 
   before(() => {

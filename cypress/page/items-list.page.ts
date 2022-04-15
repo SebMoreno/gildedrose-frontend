@@ -8,7 +8,7 @@ export class ItemsListPage {
   private static readonly qualityInput = "[data-automation=item-form-quality]";
   private static readonly typeInput = "[data-automation=item-form-type]";
   private static readonly matOption = "mat-option";
-  private static readonly addItemConfirmButton = "[data-automation=item-form-confirm-button]";
+  private static readonly itemFormConfirmButton = "[data-automation=item-form-confirm-button]";
   private static readonly deleteItemConfirmButton = "[data-automation=delete-dialog-confirm-button]";
   private static readonly getItemsRequestAlias = "getItems";
   private static readonly deleteItemRequestAlias = "deleteItem";
@@ -37,7 +37,7 @@ export class ItemsListPage {
 
   public static confirmItemCreation() {
     cy.intercept("GET", "/api/items").as(this.getItemsRequestAlias);
-    cy.get(this.addItemConfirmButton).click();
+    cy.get(this.itemFormConfirmButton).click();
     this.waitListToRender(this.getItemsRequestAlias)
   }
 
@@ -76,7 +76,7 @@ export class ItemsListPage {
   }
 
   public static validateConfirmAddButtonIs(state: string) {
-    cy.get(this.addItemConfirmButton).should(state);
+    cy.get(this.itemFormConfirmButton).should(state);
   }
   public static validateQualityErrorMessage(expectedMessage: string) {
     cy.get(this.qualityErrorMessage).should("contain.text", expectedMessage);
