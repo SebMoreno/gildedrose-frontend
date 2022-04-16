@@ -1,5 +1,5 @@
 import {Item, Types} from "src/interfaces/item";
-import {ItemsListPage} from "../page/items-list.page";
+import {ItemsListPage} from "../page";
 
 describe("Adding items", () => {
   const item: Item = {
@@ -31,7 +31,7 @@ describe("Adding items", () => {
     ItemsListPage.setAliasItemsList()
     ItemsListPage.openAddItemDialog()
     ItemsListPage.filloutItemAttributes(item);
-    ItemsListPage.confirmItemCreation();
+    ItemsListPage.confirmItemCreationOrModification();
     ItemsListPage.validateItemsListLengthIncreasedBy(itemsToBeCreated)
     ItemsListPage.validateItemIsListed(item);
   });

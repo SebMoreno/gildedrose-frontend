@@ -3,6 +3,7 @@ import {Item} from "../../src/interfaces/item";
 export class ItemsListPage {
   private static readonly addItemButton = ".list-add-button";
   private static readonly deleteItemButton = "[data-automation=list-delete-button]";
+  private static readonly editItemButton = "[data-automation=list-edit-button]";
   private static readonly nameInput = "[data-automation=item-form-name]";
   private static readonly sellInInput = "[data-automation=item-form-sell-in]";
   private static readonly qualityInput = "[data-automation=item-form-quality]";
@@ -27,15 +28,19 @@ export class ItemsListPage {
     cy.get(this.addItemButton).click();
   }
 
+  public static openEditItemDialog(item: Item) {
+    this.getItem(item).siblings().find(this.editItemButton).click();
+  }
+
   public static filloutItemAttributes(item: Item) {
-    cy.get(this.nameInput).type(item.name);
-    cy.get(this.sellInInput).type(item.sellIn.toString());
-    cy.get(this.qualityInput).type(item.quality.toString());
+    cy.get(this.nameInput).clear().type(item.name);
+    cy.get(this.sellInInput).clear().type(item.sellIn.toString());
+    cy.get(this.qualityInput).clear().type(item.quality.toString());
     cy.get(this.typeInput).click();
     cy.get(this.matOption).contains(item.type).click();
   }
 
-  public static confirmItemCreation() {
+  public static confirmItemCreationOrModification() {
     cy.intercept("GET", "/api/items").as(this.getItemsRequestAlias);
     cy.get(this.itemFormConfirmButton).click();
     this.waitListToRender(this.getItemsRequestAlias)
@@ -68,10 +73,10 @@ export class ItemsListPage {
     cy.get(this.itemsListRows).should(() => true).as(this.itemsListAlias)
   }
 
-  public static validateItemsListLengthIncreasedBy(number: number) {
+  public static validateItemsListLengthIncreasedBy(change: number) {
     cy.get("@" + this.itemsListAlias).then(initialItemsList =>
       cy.get(this.itemsListRows).its("length")
-        .should("equal", initialItemsList.length + number)
+        .should("equal", initialItemsList.length + change)
     );
   }
 
