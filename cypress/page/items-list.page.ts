@@ -62,7 +62,8 @@ export class ItemsListPage {
 
   public static waitListToRender(requestAlias: string) {
     cy.wait("@" + requestAlias);
-    cy.get(this.loadingSpinner).should("not.exist")
+    cy.get(this.loadingSpinner).should("not.exist");
+    cy.wait(2000);
   }
 
   public static validateItemIsListed(item: Item) {
@@ -70,13 +71,13 @@ export class ItemsListPage {
   }
 
   public static setAliasItemsList() {
-    cy.get(this.itemsListRows).should(() => true).as(this.itemsListAlias)
+    cy.get(this.itemsListRows).should(() => true).its("length").as(this.itemsListAlias)
   }
 
   public static validateItemsListLengthIncreasedBy(change: number) {
     cy.get("@" + this.itemsListAlias).then(initialItemsList =>
       cy.get(this.itemsListRows).its("length")
-        .should("equal", initialItemsList.length + change)
+        .should("equal", initialItemsList as unknown as number + change)
     );
   }
 

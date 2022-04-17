@@ -17,8 +17,30 @@ describe("Update the type of an item", () => {
     type: Types.AGED
   };
   before(() => {
-    // validar no existe ni prev ni new item
-    cy.request("POST", "/api/items", prevItem);
+    cy.request("/api/items").its("body").then((items: Item[]) => {
+      const prevItemInBD = items.find(it =>
+        it.name === prevItem.name &&
+        it.quality === prevItem.quality &&
+        it.type === prevItem.type &&
+        it.sellIn === prevItem.sellIn)
+      const newItemInBD = items.find(it =>
+          it.name === newItem.name &&
+          it.quality === newItem.quality &&
+          it.type === newItem.type &&
+          it.sellIn === newItem.sellIn)
+      if (prevItemInBD) {
+        cy.request("DELETE", `/api/items/${prevItemInBD.id}`)
+      }
+      if (newItemInBD) {
+        cy.request("DELETE", `/api/items/${newItemInBD.id}`)
+      }
+    });
+    cy.request({
+      method: "POST",
+      url: "/api/items",
+      body: prevItem,
+      failOnStatusCode: false
+    });
   });
 
   it("then the item type should have changed", () => {
