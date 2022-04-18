@@ -1,5 +1,7 @@
+import { Utils } from "cypress/utils/utils";
 import {Item, Types} from "../../src/interfaces/item";
 import {InsightsPage, ItemsListPage} from "../page";
+const {itemsAreEquals} = Utils;
 
 describe("Update the type of an item", () => {
   const prevItem: Item = {
@@ -18,16 +20,8 @@ describe("Update the type of an item", () => {
   };
   before(() => {
     cy.request("/api/items").its("body").then((items: Item[]) => {
-      const prevItemInBD = items.find(it =>
-        it.name === prevItem.name &&
-        it.quality === prevItem.quality &&
-        it.type === prevItem.type &&
-        it.sellIn === prevItem.sellIn)
-      const newItemInBD = items.find(it =>
-          it.name === newItem.name &&
-          it.quality === newItem.quality &&
-          it.type === newItem.type &&
-          it.sellIn === newItem.sellIn)
+      const prevItemInBD = items.find(it => itemsAreEquals(it, prevItem))
+      const newItemInBD = items.find(it => itemsAreEquals(it, newItem))
       if (prevItemInBD) {
         cy.request("DELETE", `/api/items/${prevItemInBD.id}`)
       }

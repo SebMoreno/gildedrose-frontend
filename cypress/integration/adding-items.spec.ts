@@ -1,5 +1,7 @@
+import { Utils } from "cypress/utils/utils";
 import {Item, Types} from "src/interfaces/item";
 import {ItemsListPage} from "../page";
+const {itemsAreEquals} = Utils;
 
 describe("Adding items", () => {
   const item: Item = {
@@ -13,12 +15,7 @@ describe("Adding items", () => {
   before(() => {
     cy.request("GET", "/api/items").its("body")
       .then((items: Item[]) => {
-        const itemInBd = items.find(it =>
-          it.name === item.name &&
-          it.quality === item.quality &&
-          it.type === item.type &&
-          it.sellIn === item.sellIn
-        );
+        const itemInBd = items.find(it => itemsAreEquals(it, item));
         if (itemInBd) {
           cy.request("DELETE", `/api/items/${itemInBd.id}`)
         }
