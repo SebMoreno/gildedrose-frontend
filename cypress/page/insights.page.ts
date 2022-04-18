@@ -13,10 +13,10 @@ export class InsightsPage {
 
   public static goBack() {
     cy.get(this.goBackButton).click();
-    ItemsListPage.waitListToRender(Utils.getItemsRequestAlias);    
+    ItemsListPage.waitListToRender(Utils.getItemsRequestAlias);
   }
 
-  public static setAliasTypeAmounts() {    
+  public static setAliasTypeAmounts() {
     for (let typesKey in Types) {
       cy.get(this.getItemAmountLocatorOfType(typesKey))
       .then(el => parseInt(el.text())).as(typesKey);
@@ -24,9 +24,7 @@ export class InsightsPage {
   }
 
   public static validateAmountChangedBy(change: number, type: Types) {
-    // TODO esto esta mal xD
     cy.get("@" + type).then(initialItemAmount => {
-      cy.log(initialItemAmount as unknown as string)
       cy.get(this.getItemAmountLocatorOfType(type))
         .then(el => parseInt(el.text()))
         .should("equal", initialItemAmount as unknown as string + change)
