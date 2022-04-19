@@ -1,6 +1,6 @@
-import { Item, Types } from '../../src/interfaces/item';
-import { Utils } from '../utils/utils';
-import { InsightsPage, ItemsListPage } from '../page';
+import { Item, Types } from "../../src/interfaces/item";
+import { Utils } from "../utils/utils";
+import { InsightsPage, ItemsListPage } from "../page";
 
 const {itemsAreEquals} = Utils;
 describe("Deleting one item", () => {
@@ -43,6 +43,6 @@ describe("Deleting one item", () => {
     ItemsListPage.getItem(item, false);
     ItemsListPage.validateItemsListLengthChangedBy(-1);
     InsightsPage.visit();
-    InsightsPage.validateAmountChangedBy(-1, item.type)
+    InsightsPage.validateAmountChangedBy(-1, item.type);
   });
-})
+});

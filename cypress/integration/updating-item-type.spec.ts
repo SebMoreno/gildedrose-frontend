@@ -39,7 +39,7 @@ describe("Update the type of an item", () => {
     ItemsListPage.confirmItemCreationOrModification();
     ItemsListPage.validateItemIsListed(newItem);
     InsightsPage.visit();
-    InsightsPage.validateAmountChangedBy(-1, prevItem.type)
-    InsightsPage.validateAmountChangedBy(1, newItem.type)
+    InsightsPage.validateAmountChangedBy(-1, prevItem.type);
+    InsightsPage.validateAmountChangedBy(1, newItem.type);
   });
-})
+});

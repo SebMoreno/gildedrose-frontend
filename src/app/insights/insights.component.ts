@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { ItemService } from 'src/api/item.service';
-import { Item, Types } from 'src/interfaces/item';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subject, takeUntil } from "rxjs";
+import { ItemService } from "src/api/item.service";
+import { Item, Types } from "src/interfaces/item";
 
 @Component({
-  selector: 'insights',
-  templateUrl: 'insights.component.html',
-  styleUrls: ['insights.component.css'],
+  selector: "insights",
+  templateUrl: "insights.component.html",
+  styleUrls: ["insights.component.css"],
 })
 export class InsightsComponent implements OnInit, OnDestroy {
   itemsDictionary: { [key: string]: number } = {
@@ -46,6 +46,6 @@ export class InsightsComponent implements OnInit, OnDestroy {
   }
 
   onGoBack(): void {
-    this.router.navigate(['..']);
+    this.router.navigate([".."]);
   }
 }

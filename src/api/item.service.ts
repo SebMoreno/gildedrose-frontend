@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Item } from 'src/interfaces/item';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Item } from "src/interfaces/item";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class ItemService {
   private apiURL = environment.apiURL;
 

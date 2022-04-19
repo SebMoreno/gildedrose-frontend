@@ -45,7 +45,7 @@ export class ItemsListPage {
 
   public static confirmItemCreationOrModification() {
     cy.get(this.itemFormConfirmButton).click();
-    this.waitListToRender()
+    this.waitListToRender();
   }
 
   public static getItem(item: Item, shouldExist = true) {
@@ -80,12 +80,12 @@ export class ItemsListPage {
   }
 
   public static validateItemIsListed(item: Item) {
-    this.getItem(item).should("exist")
+    this.getItem(item).should("exist");
   }
 
   public static setAliasItemsList() {
     cy.get(this.itemsListRows).should(() => {
-    }).its("length").as(this.itemsListAlias)
+    }).its("length").as(this.itemsListAlias);
   }
 
   public static validateItemsListLengthChangedBy(change: number) {

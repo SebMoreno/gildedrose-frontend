@@ -20,7 +20,7 @@ describe("Adding items", () => {
           .filter(it => itemsAreEquals(it, item))
           .forEach(it => cy.request("DELETE", `/api/items/${it.id}`))
       );
-  })
+  });
 
   it("then a new item should be displayed", () => {
     const itemsToBeCreated = 1;
@@ -32,4 +32,4 @@ describe("Adding items", () => {
     ItemsListPage.validateItemsListLengthChangedBy(itemsToBeCreated);
     ItemsListPage.validateItemIsListed(item);
   });
-})
+});

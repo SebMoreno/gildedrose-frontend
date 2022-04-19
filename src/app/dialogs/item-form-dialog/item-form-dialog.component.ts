@@ -1,12 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Item, Types } from 'src/interfaces/item';
+import { Component, Inject, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Item, Types } from "src/interfaces/item";
 
 @Component({
-  selector: 'item-form-dialog',
-  templateUrl: 'item-form-dialog.component.html',
-  styleUrls: ['item-form-dialog.component.css'],
+  selector: "item-form-dialog",
+  templateUrl: "item-form-dialog.component.html",
+  styleUrls: ["item-form-dialog.component.css"],
 })
 export class ItemFormDialogComponent implements OnInit {
   isUpdating = false;
@@ -19,10 +19,10 @@ export class ItemFormDialogComponent implements OnInit {
   ) {}
 
   form = this.fb.group({
-    name: ['', [Validators.required]],
-    sellIn: ['', [Validators.required]],
-    quality: ['', [Validators.required, Validators.min(0), Validators.max(80)]],
-    type: ['', [Validators.required]],
+    name: ["", [Validators.required]],
+    sellIn: ["", [Validators.required]],
+    quality: ["", [Validators.required, Validators.min(0), Validators.max(80)]],
+    type: ["", [Validators.required]],
   });
 
   ngOnInit(): void {

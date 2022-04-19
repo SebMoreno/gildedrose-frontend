@@ -1,5 +1,5 @@
 import {Item, Types} from "src/interfaces/item";
-import {ItemsListPage} from "../page/items-list.page";
+import {ItemsListPage} from "../page";
 
 describe("Adding items with miss information", () => {
   const item: Item = {
@@ -14,9 +14,9 @@ describe("Adding items with miss information", () => {
 
   it("then the item can't be created", () => {
     ItemsListPage.visit();
-    ItemsListPage.openAddItemDialog()
+    ItemsListPage.openAddItemDialog();
     ItemsListPage.filloutItemAttributes(item);
     ItemsListPage.validateConfirmAddButtonIs(confirmButtonStateExpected);
-    ItemsListPage.validateQualityErrorMessage(qualityErrorExpected)
+    ItemsListPage.validateQualityErrorMessage(qualityErrorExpected);
   });
-})
+});

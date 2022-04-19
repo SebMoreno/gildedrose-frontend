@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { ItemService } from 'src/api/item.service';
-import { Item } from 'src/interfaces/item';
-import { MatDialog } from '@angular/material/dialog';
-import { ItemFormDialogComponent } from '../dialogs/item-form-dialog/item-form-dialog.component';
-import { DeleteDialogComponent } from '../dialogs/delete-dialog/delete-dialog.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subject, takeUntil } from "rxjs";
+import { ItemService } from "src/api/item.service";
+import { Item } from "src/interfaces/item";
+import { MatDialog } from "@angular/material/dialog";
+import { ItemFormDialogComponent } from "../dialogs/item-form-dialog/item-form-dialog.component";
+import { DeleteDialogComponent } from "../dialogs/delete-dialog/delete-dialog.component";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'list',
-  templateUrl: 'list.component.html',
-  styleUrls: ['list.component.css'],
+  selector: "list",
+  templateUrl: "list.component.html",
+  styleUrls: ["list.component.css"],
 })
 export class ListComponent implements OnInit, OnDestroy {
   items: Item[] = [];
@@ -114,18 +114,18 @@ export class ListComponent implements OnInit, OnDestroy {
         next: () => {
           this.getItems();
           this.openSnackbar(
-            'The quality has been updated for all the items.',
-            'success'
+            "The quality has been updated for all the items.",
+            "success"
           );
         },
         error: () => {
-          this.openSnackbar('Uppsss! something went wrong.', 'error');
+          this.openSnackbar("Uppsss! something went wrong.", "error");
         },
       });
   }
 
   onViewInsights(): void {
-    this.router.navigate(['../insights'], { relativeTo: this.route });
+    this.router.navigate(["../insights"], { relativeTo: this.route });
   }
 
   onViewItem(item: Item): void {
@@ -133,10 +133,10 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   openSnackbar(message: string, type: string): void {
-    this.snackBar.open(message, '', {
+    this.snackBar.open(message, "", {
       duration: 2000,
-      horizontalPosition: 'left',
-      verticalPosition: 'bottom',
+      horizontalPosition: "left",
+      verticalPosition: "bottom",
       panelClass: [`snackbar-${type}`],
     });
   }

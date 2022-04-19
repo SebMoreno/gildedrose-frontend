@@ -7,8 +7,8 @@ export interface Item {
 }
 
 export enum Types {
-  AGED = 'AGED',
-  NORMAL = 'NORMAL',
-  LEGENDARY = 'LEGENDARY',
-  TICKETS = 'TICKETS',
+  AGED = "AGED",
+  NORMAL = "NORMAL",
+  LEGENDARY = "LEGENDARY",
+  TICKETS = "TICKETS",
 }

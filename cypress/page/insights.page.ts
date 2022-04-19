@@ -27,12 +27,12 @@ export class InsightsPage {
     cy.get("@" + type).then(initialItemAmount => {
       cy.get(this.getItemAmountLocatorOfType(type))
         .then(el => parseInt(el.text()))
-        .should("equal", initialItemAmount as unknown as string + change)
+        .should("equal", initialItemAmount as unknown as string + change);
     }
     );
   }
 
   private static getItemAmountLocatorOfType(type: string) {
-    return `[data-automation=item-type-${type.toLowerCase()}-value]`
+    return `[data-automation=item-type-${type.toLowerCase()}-value]`;
   }
 }

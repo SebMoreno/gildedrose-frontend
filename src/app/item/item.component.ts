@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { ItemService } from 'src/api/item.service';
-import { Item } from 'src/interfaces/item';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subject, takeUntil } from "rxjs";
+import { ItemService } from "src/api/item.service";
+import { Item } from "src/interfaces/item";
 
 @Component({
-  selector: 'item',
-  templateUrl: 'item.component.html',
-  styleUrls: ['item.component.css'],
+  selector: "item",
+  templateUrl: "item.component.html",
+  styleUrls: ["item.component.css"],
 })
 export class ItemComponent implements OnInit, OnDestroy {
   item: any;
@@ -20,7 +20,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   ) {}
 
   getItem(): void {
-    const id = this.route.snapshot.params['id'];
+    const id = this.route.snapshot.params["id"];
     this.itemsService
       .getItem(id)
       .pipe(takeUntil(this.unsubscribe$))
@@ -39,6 +39,6 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   onGoBack(): void {
-    this.router.navigate(['..']);
+    this.router.navigate([".."]);
   }
 }

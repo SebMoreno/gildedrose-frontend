@@ -22,7 +22,7 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
       .pipe(
         catchError(error => {
           if (error instanceof HttpErrorResponse && error.status === 404) {
-            this.router.navigate(['not-found'], {skipLocationChange: true});
+            this.router.navigate(["not-found"], {skipLocationChange: true});
           }
           return throwError(() => error);
         }

@@ -3,4 +3,4 @@
 // @ts-ignore
 // noinspection JSUnusedLocalSymbols
 
-module.exports = (on, config) => {}
+module.exports = (on, config) => {};
