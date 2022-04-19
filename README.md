@@ -29,3 +29,7 @@ If you want to run the tests in headless mode, run `ng run praxis-fe:cypress-run
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 There are also some shortcuts to quickly get to the most used commands via  `npm`. For more information on the shortcuts, see the `package.json` file in the root of the project, scripts section.
+
+## Backend.
+
+The backend of the application can be found in the repository [praxis-gildedrose](https://github.com/SebMoreno/praxis-gildedrose). For fast infrastructure setup, I recommend reading the [README-VAGRANT.md](https://github.com/SebMoreno/praxis-gildedrose/blob/main/README-VAGRANT.md) file. Be sure to match the [listening port of the frontend](./proxy.config.json) with the one of the backend (click [here](https://github.com/SebMoreno/praxis-gildedrose/blob/main/src/main/resources/application.properties) for standard configuration or [here](https://github.com/SebMoreno/praxis-gildedrose/tree/main/prod) for vagrant configuration).
