@@ -70,7 +70,6 @@ export class ItemsListPage {
   public static deleteItem(item: Item) {
     this.getItem(item).siblings().find(this.deleteItemButton).click();
     cy.get(this.deleteItemConfirmButton).click();
-    cy.wait("@" + Utils.deleteItemRequestAlias);
     this.waitListToRender();
   }
 

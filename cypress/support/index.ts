@@ -19,5 +19,4 @@ import { Utils } from "cypress/utils/utils";
 // import './commands';
 beforeEach(() => {
     cy.intercept("GET", "/api/items").as(Utils.getItemsRequestAlias);
-    cy.intercept("DELETE", "/api/items/*").as(Utils.deleteItemRequestAlias);
 })
