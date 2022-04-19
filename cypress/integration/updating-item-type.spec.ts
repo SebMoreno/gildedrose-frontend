@@ -20,21 +20,12 @@ describe("Update the type of an item", () => {
   };
   before(() => {
     cy.request("/api/items").its("body").then((items: Item[]) => {
-      const prevItemInBD = items.find(it => itemsAreEquals(it, prevItem))
-      const newItemInBD = items.find(it => itemsAreEquals(it, newItem))
-      if (prevItemInBD) {
-        cy.request("DELETE", `/api/items/${prevItemInBD.id}`)
-      }
-      if (newItemInBD) {
-        cy.request("DELETE", `/api/items/${newItemInBD.id}`)
-      }
+      items.filter(it => itemsAreEquals(it, prevItem))
+        .forEach(it => cy.request("DELETE", `/api/items/${it.id}`));
+      items.filter(it => itemsAreEquals(it, newItem))
+        .forEach(it => cy.request("DELETE", `/api/items/${it.id}`));
     });
-    cy.request({
-      method: "POST",
-      url: "/api/items",
-      body: prevItem,
-      failOnStatusCode: false
-    });
+    cy.request("POST", "/api/items", prevItem);
   });
 
   it("then the item type should have changed", () => {

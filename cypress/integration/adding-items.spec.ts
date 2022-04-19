@@ -1,6 +1,7 @@
 import { Utils } from "cypress/utils/utils";
-import {Item, Types} from "src/interfaces/item";
-import {ItemsListPage} from "../page";
+import { Item, Types } from "src/interfaces/item";
+import { ItemsListPage } from "../page";
+
 const {itemsAreEquals} = Utils;
 
 describe("Adding items", () => {
@@ -14,22 +15,21 @@ describe("Adding items", () => {
 
   before(() => {
     cy.request("GET", "/api/items").its("body")
-      .then((items: Item[]) => {
-        const itemInBd = items.find(it => itemsAreEquals(it, item));
-        if (itemInBd) {
-          cy.request("DELETE", `/api/items/${itemInBd.id}`)
-        }
-      })
+      .then((items: Item[]) =>
+        items
+          .filter(it => itemsAreEquals(it, item))
+          .forEach(it => cy.request("DELETE", `/api/items/${it.id}`))
+      );
   })
 
   it("then a new item should be displayed", () => {
     const itemsToBeCreated = 1;
     ItemsListPage.visit();
-    ItemsListPage.setAliasItemsList()
-    ItemsListPage.openAddItemDialog()
+    ItemsListPage.setAliasItemsList();
+    ItemsListPage.openAddItemDialog();
     ItemsListPage.filloutItemAttributes(item);
     ItemsListPage.confirmItemCreationOrModification();
-    ItemsListPage.validateItemsListLengthIncreasedBy(itemsToBeCreated)
+    ItemsListPage.validateItemsListLengthChangedBy(itemsToBeCreated);
     ItemsListPage.validateItemIsListed(item);
   });
 })

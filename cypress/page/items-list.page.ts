@@ -1,5 +1,5 @@
 import { Utils } from "cypress/utils/utils";
-import {Item} from "../../src/interfaces/item";
+import { Item } from "../../src/interfaces/item";
 
 export class ItemsListPage {
   private static readonly addItemButton = ".list-add-button";
@@ -16,10 +16,15 @@ export class ItemsListPage {
   private static readonly loadingSpinner = ".list-empty .mat-progress-spinner";
   private static readonly itemsListRows = "[data-automation=list-item-row]";
   private static readonly qualityErrorMessage = "[data-automation=item-form-quality] .mat-error";
+  private static readonly nameCol = ":nth-child(1)";
+  private static readonly sellInCol = ":nth-child(2)";
+  private static readonly qualityCol = ":nth-child(3)";
+  private static readonly typeCol = ":nth-child(4)";
+
 
   public static visit() {
     cy.visit("/list");
-    this.waitListToRender(Utils.getItemsRequestAlias);
+    this.waitListToRender();
   }
 
   public static openAddItemDialog() {
@@ -40,24 +45,37 @@ export class ItemsListPage {
 
   public static confirmItemCreationOrModification() {
     cy.get(this.itemFormConfirmButton).click();
-    this.waitListToRender(Utils.getItemsRequestAlias)
+    this.waitListToRender()
   }
 
-  public static getItem(item: Item) {
-    return cy.get(".mat-card > :nth-child(1)").filter(`:contains('${item.name}')`)
-      .siblings(":nth-child(2)").filter(`:contains('${item.sellIn}')`)
-      .siblings(":nth-child(3)").filter(`:contains('${item.quality}')`)
-      .siblings(":nth-child(4)").filter(`:contains('${item.type}')`);
+  public static getItem(item: Item, shouldExist = true) {
+    const itemName = cy.get(".mat-card > " + this.nameCol).filter(`:contains('${item.name}')`);
+    if (shouldExist) {
+      return itemName.siblings(this.sellInCol).filter(`:contains('${item.sellIn}')`)
+        .siblings(this.qualityCol).filter(`:contains('${item.quality}')`)
+        .siblings(this.typeCol).filter(`:contains('${item.type}')`);
+    }
+    return itemName.should($name => {
+      if (!$name.length) return;
+      const $sellIn = $name.siblings(this.sellInCol).filter(`:contains('${item.sellIn}')`);
+      if (!$sellIn.length) return;
+      const $quality = $sellIn.siblings(this.qualityCol).filter(`:contains('${item.quality}')`);
+      if (!$quality.length) return;
+      const $type = $quality.siblings(this.typeCol).filter(`:contains('${item.type}')`);
+      if (!$type.length) return;
+      expect($type.parent(), "item must not me rendered").to.not.exist;
+    });
   }
 
   public static deleteItem(item: Item) {
     this.getItem(item).siblings().find(this.deleteItemButton).click();
-    cy.get(this.deleteItemConfirmButton).contains("Delete").click();
-    this.waitListToRender(Utils.deleteItemRequestAlias);
+    cy.get(this.deleteItemConfirmButton).click();
+    cy.wait("@" + Utils.deleteItemRequestAlias);
+    this.waitListToRender();
   }
 
-  public static waitListToRender(requestAlias: string) {
-    cy.wait("@" + requestAlias);
+  public static waitListToRender() {
+    cy.wait("@" + Utils.getItemsRequestAlias);
     cy.get(this.loadingSpinner).should("not.exist");
     cy.wait(2000);
   }
@@ -67,10 +85,11 @@ export class ItemsListPage {
   }
 
   public static setAliasItemsList() {
-    cy.get(this.itemsListRows).should(() => true).its("length").as(this.itemsListAlias)
+    cy.get(this.itemsListRows).should(() => {
+    }).its("length").as(this.itemsListAlias)
   }
 
-  public static validateItemsListLengthIncreasedBy(change: number) {
+  public static validateItemsListLengthChangedBy(change: number) {
     cy.get("@" + this.itemsListAlias).then(initialItemsList =>
       cy.get(this.itemsListRows).its("length")
         .should("equal", initialItemsList as unknown as number + change)
@@ -80,6 +99,7 @@ export class ItemsListPage {
   public static validateConfirmAddButtonIs(state: string) {
     cy.get(this.itemFormConfirmButton).should(state);
   }
+
   public static validateQualityErrorMessage(expectedMessage: string) {
     cy.get(this.qualityErrorMessage).should("contain.text", expectedMessage);
   }
