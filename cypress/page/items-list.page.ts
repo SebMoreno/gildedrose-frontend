@@ -1,4 +1,4 @@
-import { Utils } from "cypress/utils/utils";
+import { Constants } from "../utils/constants";
 import { Item } from "../../src/interfaces/item";
 
 export class ItemsListPage {
@@ -74,7 +74,7 @@ export class ItemsListPage {
   }
 
   public static waitListToRender() {
-    cy.wait("@" + Utils.getItemsRequestAlias);
+    cy.wait("@" + Constants.GETITEMS_REQUEST_ALIAS);
     cy.get(this.loadingSpinner).should("not.exist");
     cy.wait(2000);
   }

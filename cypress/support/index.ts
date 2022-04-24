@@ -13,10 +13,10 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-import { Utils } from "cypress/utils/utils";
+import { Constants } from "../utils/constants";
 
 // When a command from ./commands is ready to use, import with `import './commands'` syntax
 // import './commands';
 beforeEach(() => {
-    cy.intercept("GET", "/api/items").as(Utils.getItemsRequestAlias);
+  cy.intercept("GET", "/api/items").as(Constants.GETITEMS_REQUEST_ALIAS);
 });

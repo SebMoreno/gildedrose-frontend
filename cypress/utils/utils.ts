@@ -1,8 +1,6 @@
 import { Item } from "src/interfaces/item";
 
 export class Utils {
-  public static readonly getItemsRequestAlias = "getItems";
-
   public static itemsAreEquals(item1: Item, item2: Item) {
     return item1.name === item2.name &&
       item1.quality === item2.quality &&
