@@ -75,11 +75,13 @@
           "configurations": {
             "production": {
               "browserTarget": "praxis-fe:build:production",
-              "proxyConfig": "proxy.config.js"
+              "proxyConfig": "proxy.config.js",
+              "host": "0.0.0.0"
             },
             "development": {
               "browserTarget": "praxis-fe:build:development",
-              "proxyConfig": "proxy.config.js"
+              "proxyConfig": "proxy.config.js",
+              "host": "0.0.0.0"
             }
           },
           "defaultConfiguration": "development"
