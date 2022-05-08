@@ -1,0 +1,18 @@
+pipeline {
+  agent any
+  stages{
+    stage("Build image") {
+       steps {
+          sh '''
+              docker container stop $(docker container ls -aq)
+              docker container prune -f
+              BD_CONTAINER_ID=$(docker run -d --name db -e POSTGRES_PASSWORD=secret      -p 5432:5432 postgres)
+              BD_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $BD_CONTAINER_ID)
+              API_CONTAINER_ID=$(docker run -d --name backend     -e DATABASE_HOST_IP=$BD_IP  -p 9090:8080 sebmoreno/gildedrose-backend)
+              API_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $API_CONTAINER_ID)
+              docker run -d --name frontend    -e API_HOST_URL=$API_IP -e API_HOST_PORT=9090 -p 80:80     sebmoreno/gildedrose-frontend
+          '''
+       }
+    }
+  }
+}
