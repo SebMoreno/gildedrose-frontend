@@ -4,7 +4,7 @@ pipeline {
     stage("Build image") {
        steps {
           sh '''
-              CONTAINERS_TO_STOP=docker ps -a | grep -v "db" | awk 'NR>1 {print $1}'
+              CONTAINERS_TO_STOP=$(docker ps -a | grep -v "db" | awk 'NR>1 {print $1}')
               if ! [ -z "$CONTAINERS_TO_STOP" ]
               then
                 docker container stop $CONTAINERS_TO_STOP
