@@ -4,7 +4,7 @@ pipeline {
     stage("Build image") {
        steps {
           sh '''
-              docker container stop $(docker container ls -aq)
+              docker container stop $(docker ps -a | grep -v "db" | awk 'NR>1 {print $1}')
               docker container prune -f
               BD_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db)
               API_CONTAINER_ID=$(docker run -d --name backend     -e DATABASE_HOST_IP=$BD_IP  -p 9090:8080 sebmoreno/gildedrose-backend)
