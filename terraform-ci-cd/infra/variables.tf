@@ -41,6 +41,11 @@ variable "user_data" {
   description = "user data path"
 }
 
+variable "ec2_volume_size" {
+  description = "The EC2 volume size"
+  type        = number
+}
+
 variable "ec2_tags" {
   description = "EC2 resource tags"
   type        = map(string)
@@ -70,12 +75,17 @@ variable "sg_tags" {
   type        = map(string)
 }
 
+variable "allowed_cidr_for_sg" {
+  description = "CIDR (IP) to allow inbound traffic over tcp for ssh and other ports for testing"
+  type        = string
+}
+
+#######################################################
+# EIP variables
+#######################################################
+
 variable "eip_tags" {
   description = "EIP resource tags"
   type        = map(string)
 }
 
-variable "allowed_cidr_for_sg" {
-  description = "CIDR (IP) to allow inbound traffic over tcp for ssh and other ports for testing"
-  type        = string
-}

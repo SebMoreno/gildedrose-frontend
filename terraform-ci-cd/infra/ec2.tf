@@ -7,4 +7,7 @@ resource "aws_instance" "jenkins_server" {
   key_name                    = var.key_pair_name
   user_data                   = var.user_data #context where is executed
   tags                        = var.ec2_tags
+  root_block_device {
+    volume_size = var.ec2_volume_size
+  }
 }
