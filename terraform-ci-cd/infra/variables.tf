@@ -16,11 +16,6 @@ variable "instance_type" {
   description = "EC2 instance type"
 }
 
-variable "ec2_tags" {
-  description = "EC2 resource tags"
-  type        = map(string)
-}
-
 variable "ami_id" {
   type        = string
   description = "EC2 AMI ID"
@@ -46,6 +41,11 @@ variable "user_data" {
   description = "user data path"
 }
 
+variable "ec2_tags" {
+  description = "EC2 resource tags"
+  type        = map(string)
+}
+
 ##############################################
 # Security group variables
 ##############################################
@@ -68,4 +68,14 @@ variable "vpc_id" {
 variable "sg_tags" {
   description = "SG resource tags"
   type        = map(string)
+}
+
+variable "eip_tags" {
+  description = "EIP resource tags"
+  type        = map(string)
+}
+
+variable "allowed_cidr_for_sg" {
+  description = "CIDR (IP) to allow inbound traffic over tcp for ssh and other ports for testing"
+  type        = string
 }

@@ -1,4 +1,9 @@
-output "public_ip_address" {
-  description = "public ip address"
-  value       = aws_instance.ec2_instance.public_ip
+output "public_ip_jenkins" {
+  description = "public ip address of jenkins server"
+  value       = aws_instance.jenkins_server.public_ip
+}
+
+output "public_dns_jenkins" {
+  description = "public dns address of jenkins server"
+  value       = aws_instance.jenkins_server.public_dns
 }
