@@ -1,4 +1,4 @@
-resource "aws_db_instance" "postgres_db" {
+resource "aws_db_instance" "app_db" {
   identifier             = var.rds_identifier
   engine                 = var.rds_engine
   instance_class         = var.rds_instance_class

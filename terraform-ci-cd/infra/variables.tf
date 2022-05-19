@@ -109,19 +109,19 @@ variable "eip_tags" {
 #######################################################
 
 variable "rds_subnet_group_name" {
-  description = ""
+  description = "RDS subnet group name"
   type        = string
 }
 variable "rds_subnet_id_1" {
-  description = ""
+  description = "First VPC subnet to use in the RDS"
   type        = string
 }
 variable "rds_subnet_id_2" {
-  description = ""
+  description = "Second VPC subnet to use in the RDS"
   type        = string
 }
 variable "rds_subnet_group_tags" {
-  description = ""
+  description = "RDS subnet group tags"
   type        = map(string)
 }
 
@@ -130,38 +130,38 @@ variable "rds_subnet_group_tags" {
 #######################################################
 
 variable "rds_identifier" {
-  description = ""
+  description = "RDS DB name/identifier"
   type        = string
 }
 variable "rds_engine" {
-  description = ""
+  description = "RDS engine to use"
   type        = string
 }
 variable "rds_instance_class" {
-  description = ""
+  description = "RDS instance class"
   type        = string
 }
 variable "rds_name" {
-  description = ""
+  description = "RDS initial db name to create inside the RDS instance"
   type        = string
 }
 variable "rds_username" {
-  description = ""
+  description = "RDS username"
   type        = string
 }
 variable "rds_password" {
-  description = ""
+  description = "RDS password"
   type        = string
 }
 variable "rds_allocated_storage" {
-  description = ""
+  description = "RDS size of the initial allocated storage"
   type        = number
 }
 variable "rds_skip_final_snapshot" {
-  description = ""
+  description = "If the RDS should create a snapshot when deleted"
   type        = bool
 }
 variable "rds_tags" {
-  description = ""
+  description = "RDS tags"
   type        = map(string)
 }
