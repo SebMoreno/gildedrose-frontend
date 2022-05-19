@@ -13,17 +13,17 @@ resource "aws_security_group" "jenkins_server_ec2_sg" {
   }
 
   ingress {
-    description = "ssh"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "TCP"
-    cidr_blocks = [var.allowed_cidr_for_ec2_sg]
-  }
-
-  ingress {
     description = "jenkins"
     from_port   = 8080
     to_port     = 8080
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
     protocol    = "TCP"
     cidr_blocks = [var.allowed_cidr_for_ec2_sg]
   }
