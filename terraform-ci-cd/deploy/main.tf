@@ -1,7 +1,7 @@
 module "deploy_ec2" {
   source          = "../infra"
   aws_region      = "us-east-1"
-  instance_type   = "t2.micro"
+  instance_type   = "t2.small"
   ec2_tags        = { Name = "group2-ec2" }
   ami_id          = "ami-005de95e8ff495156"
   key_pair_name   = "group2-kp"
