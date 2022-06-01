@@ -32,7 +32,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .getItems()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((items: Item[]) => {
-        this.items = items.map(it => ({...it, name: it.name + "test"}));
+        this.items = items;
         this.isLoading = false;
       });
   }
